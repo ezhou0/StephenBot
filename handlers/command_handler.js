@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+// const { Client } = require('discord.js');
 const fs = require('fs');
 
 module.exports = (bot, Discord)=>{
@@ -7,7 +7,7 @@ module.exports = (bot, Discord)=>{
     for(const file of command_files){
         const command = require(`../commands/${file}`);
         if (command.name) {
-            Client.commands.set(command.name, command);
+            bot.commands.set(command.name, command);
         } else {
             continue;
         }
