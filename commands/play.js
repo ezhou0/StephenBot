@@ -69,13 +69,20 @@ module.exports = {
     
 }
 
+const leave_server = (guild) => {
+    queue.get(guild.id).voice_channel.leave();
+    queue.delete(guild.id);
+    return;
+}
+
 const video_player = async (guild, song)=> {
     const song_queue = queue.get(guild.id);
     if(!song){
         
-        song_queue.voice_channel.leave();
-        queue.delete(guild.id);
-        return ;
+        // song_queue.voice_channel.leave();
+        // queue.delete(guild.id);
+        // return ;
+        setTimeout(leave_server(guild),1000);
     }
     const stream = ytdl(song.url, {filter: 'audioonly'});
     song_queue.connection.play(stream, {seek:0, volume: 0.5})
