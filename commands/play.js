@@ -63,7 +63,7 @@ module.exports = {
 
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if (cmd === 'leave') stop_song(message, server_queue); 
-        else if(cmd === 'l') queue_list(message, server_queue, Discord);     
+        else if(cmd === 'l') queue_list(message, server_queue, Discord);  
     }
 
     
