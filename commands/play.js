@@ -6,8 +6,8 @@ const queue = new Map();
 
 
 module.exports = {
-    name: 'play',
-    aliases: ['skip', 'stop'],
+    name: 'q',
+    aliases: ['skip', 'leave', 'l'],
     cooldown: 0,
     async execute(message, args, cmd, bot, Discord){
         const voice_channel = message.member.voice.channel;
@@ -17,7 +17,7 @@ module.exports = {
 
         const server_queue = queue.get(message.guild.id);
 
-        if(cmd === 'play'){
+        if(cmd === 'q'){
             if(!args.length) return message.channel.send('You need to add another argument');
             let song ={};
             if(ytdl.validateURL(args[0])){
@@ -62,7 +62,8 @@ module.exports = {
         }
 
         else if(cmd === 'skip') skip_song(message, server_queue);
-        else if (cmd === 'stop') stop_song(message, server_queue);       
+        else if (cmd === 'leave') stop_song(message, server_queue); 
+        else if(cmd === 'l') queue_list(message, server_queue, message.guild, Discord);     
     }
 
     
@@ -71,9 +72,10 @@ module.exports = {
 const video_player = async (guild, song)=> {
     const song_queue = queue.get(guild.id);
     if(!song){
+        
         song_queue.voice_channel.leave();
         queue.delete(guild.id);
-        return;
+        return ;
     }
     const stream = ytdl(song.url, {filter: 'audioonly'});
     song_queue.connection.play(stream, {seek:0, volume: 0.5})
@@ -96,4 +98,22 @@ const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
+}
+
+const queue_list = (message, server_queue, guild, Discord) =>{
+    if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command');
+    if(!server_queue) return message.channel.send('There are no songs currently in the queue.');
+    const song_queue = queue.get(guild.id)
+    const queueEmbed = new Discord.MessageEmbed()
+        .setColor('#4cbb17')
+        .setTitle('Song Queue')
+        .addFields(
+            { name: `1: ` + `${song_queue.songs[0].title}`, value: description +`\n\u200b`},
+            { name: `2: ` + `${song_queue.songs[1].title}`, value: description + `\n\u200b` },
+            { name: `3: ` + `${song_queue.songs[2].title}`, value: description + `\n\u200b` },
+            { name: `4: ` + `${song_queue.songs[3].title}`, value: description + `\n\u200b` },
+            { name: `5: ` + `${song_queue.songs[4].title}`, value: description + `\n\u200b` },
+        );
+    
+        message.channel.send(queueEmbed);
 }

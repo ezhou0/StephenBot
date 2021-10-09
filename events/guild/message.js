@@ -1,5 +1,3 @@
-const { Client } = require('discord.js');
-
 require('dotenv').config();
 
 module.exports = (Discord, bot, message) => {
@@ -8,10 +6,11 @@ module.exports = (Discord, bot, message) => {
 
     const args = message.content.slice(prefix.length).split(" ");
     const cmd = args.shift().toLowerCase();
-    // console.log(cmd)
+    
 
     const command = bot.commands.get(cmd) || bot.commands.find(a=>a.aliases && a.aliases.includes(cmd));
-    if(command) command.execute(bot, message, args, Discord);
+    // console.log('command');
+    // if(command) command.execute(bot, message, args, Discord);
 
     try{
         command.execute(message, args, cmd, bot, Discord);
