@@ -10,7 +10,8 @@ module.exports={
             {name: '-q', value: 'add your search argument after'},
             {name: '-skip', value: 'skips to next song in queue'},
             {name: '-leave', value: 'skips remaining songs and leaves'},
-            { name: '-l', value: 'displays songs in queue' }
+            { name: '-l', value: 'displays songs in queue' },
+            {name: '-rip', value: 'a dedication to the OG Stephen'}
         );
         message.channel.send(newEmbed);
     }
