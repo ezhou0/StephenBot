@@ -63,7 +63,7 @@ module.exports = {
 
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if (cmd === 'leave') stop_song(message, server_queue); 
-        else if(cmd === 'l') queue_list(message, server_queue, message.guild, Discord);     
+        else if(cmd === 'l') queue_list(message, server_queue, Discord);     
     }
 
     
@@ -100,19 +100,27 @@ const stop_song = (message, server_queue) => {
     server_queue.connection.dispatcher.end();
 }
 
-const queue_list = (message, server_queue, guild, Discord) =>{
+const queue_list = (message, server_queue, Discord) =>{
     if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command');
     if(!server_queue) return message.channel.send('There are no songs currently in the queue.');
-    const song_queue = queue.get(guild.id)
+    const song_queue = queue.get(message.guild.id);
+    let list = [];
+    for(let i = 1; i<song_queue.songs.length;i++){
+        list.push(song_queue.songs[i].title);
+    }
+
+    if(list.length === 0){
+        list = 'No more songs in queue.';
+    }
+
+
     const queueEmbed = new Discord.MessageEmbed()
         .setColor('#4cbb17')
         .setTitle('Song Queue')
         .addFields(
-            { name: `1: ` + `${song_queue.songs[0].title}`, value: description +`\n\u200b`},
-            { name: `2: ` + `${song_queue.songs[1].title}`, value: description + `\n\u200b` },
-            { name: `3: ` + `${song_queue.songs[2].title}`, value: description + `\n\u200b` },
-            { name: `4: ` + `${song_queue.songs[3].title}`, value: description + `\n\u200b` },
-            { name: `5: ` + `${song_queue.songs[4].title}`, value: description + `\n\u200b` },
+            { name: `Current Song:`, value: `${song_queue.songs[0].title}`},
+            { name: `Songs up next:` , value: `${list}` }
+           
         );
     
         message.channel.send(queueEmbed);
