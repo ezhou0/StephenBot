@@ -1,3 +1,4 @@
+const message = require("../events/guild/message");
 const { execute } = require("./play");
 
 module.exports={
@@ -12,9 +13,10 @@ module.exports={
             {name: '!play', value: 'add your search argument after'},
             {name: '!skip', value: 'skips to next song in queue'},
             {name: '!stop', value: 'skips remaining songs and leaves'}
-        )
+        );
+        message.channel.send(newEmbed);
     }
 
 
-
+   
 }
