@@ -6,7 +6,7 @@ module.exports = {
         const ripEmbed = new Discord.MessageEmbed()
             .setColor('#808000')
             .setTitle('RIP STEPHEN')
-            .setDescription('Rest in peace Stephen, the best music bot. Bless him for gracing us with his presence.')
+            .setDescription('Rest in peace Stephen, the best music bot. Bless him for gracing us with his presence.');
             
         message.channel.send(ripEmbed);
     }
