@@ -1,0 +1,28 @@
+{
+  "name": "stephenbot",
+  "version": "1.0.0",
+  "description": "In memory of Stephen the MusicBot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezhou0/StephenBot.git"
+  },
+  "author": "Edwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ezhou0/StephenBot/issues"
+  },
+  "homepage": "https://github.com/ezhou0/StephenBot#readme",
+  "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
+    "discord.js": "12.5.3",
+    "dotenv": "^10.0.0",
+    "ffmpeg": "0.0.4",
+    "fs": "0.0.1-security",
+    "yt-search": "^2.10.1",
+    "ytdl-core": "^4.9.1"
+  }
+}
