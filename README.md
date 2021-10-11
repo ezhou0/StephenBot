@@ -7,6 +7,10 @@ In memory of the original Stephen the MusicBot.
 * Able to skip to next track
 * Sends helper message with all available commands
 
+## Future Features
+* Ability to search from Spotify
+* Improved response visuals
+
 
 Built using Node.js, Discord.js.
 
