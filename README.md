@@ -8,5 +8,5 @@ In memory of the original Stephen the MusicBot.
 * Sends helper message with all available commands
 
 
-* Built using Node.js, Discord.js.
+Built using Node.js, Discord.js.
 
